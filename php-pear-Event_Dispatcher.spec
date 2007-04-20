@@ -3,10 +3,12 @@
 %define		_status		beta
 %define		_pearname	%{_class}_%{_subclass}
 
+%define		_requires_exceptions pear(PHPUnit.php)
+
 Summary:	%{_pearname} - Dispatch notifications using PHP callbacks
 Name:		php-pear-%{_pearname}
 Version:	1.0.0
-Release:	%mkrel 2
+Release:	%mkrel 3
 License:	PHP License
 Group:		Development/PHP
 Source0:	http://pear.php.net/get/%{_pearname}-%{version}.tar.bz2
@@ -82,5 +84,3 @@ rm -rf %{buildroot}
 %doc %{_pearname}-%{version}/{tests,examples}
 %{_datadir}/pear/%{_class}
 %{_datadir}/pear/packages/%{_pearname}.xml
-
-
