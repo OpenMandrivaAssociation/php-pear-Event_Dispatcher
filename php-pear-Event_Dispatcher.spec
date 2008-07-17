@@ -8,7 +8,7 @@
 Summary:	%{_pearname} - Dispatch notifications using PHP callbacks
 Name:		php-pear-%{_pearname}
 Version:	1.0.0
-Release:	%mkrel 3
+Release:	%mkrel 4
 License:	PHP License
 Group:		Development/PHP
 Source0:	http://pear.php.net/get/%{_pearname}-%{version}.tar.bz2
@@ -18,7 +18,7 @@ Requires(preun): php-pear
 Requires:	php-pear
 BuildArch:	noarch
 BuildRequires:	dos2unix
-BuildRoot:	%{_tmppath}/%{name}-%{version}-buildroot
+BuildRoot:	%{_tmppath}/%{name}-%{version}-%{release}-buildroot
 
 %description
 The Event_Dispatcher acts as a notification dispatch table. It is used
