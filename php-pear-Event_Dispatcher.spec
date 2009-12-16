@@ -4,14 +4,14 @@
 
 %define		_requires_exceptions pear(PHPUnit.php)
 
-Summary:	Dispatch notifications using PHP callbacks
 Name:		php-pear-%{upstream_name}
 Version:	1.1.0
-Release:	%mkrel 1
+Release:	%mkrel 2
+Summary:	Dispatch notifications using PHP callbacks
 License:	PHP License
 Group:		Development/PHP
-Source0:	http://pear.php.net/get/%{upstream_name}-%{version}.tar.bz2
 URL:		http://pear.php.net/package/Event_Dispatcher/
+Source0:	http://download.pear.php.net/package/%{upstream_name}-%{version}.tar.bz2
 Requires(post): php-pear
 Requires(preun): php-pear
 Requires:	php-pear
@@ -29,7 +29,6 @@ posts an appropriate notification to the Event_Dispatcher. The
 Event_Dispatcher dispatches a message to each registered observer,
 passing the notification as the sole argument.
 
-In PEAR status of this package is: %{_status}.
 
 %prep
 %setup -q -c
@@ -42,24 +41,28 @@ cd %{upstream_name}-%{version}
 pear install --nodeps --packagingroot %{buildroot} %{upstream_name}.xml
 rm -rf %{buildroot}%{_datadir}/pear/.??*
 
-rm -rf %{buildroot}%{_datadir}/pear/doc
-rm -rf %{buildroot}%{_datadir}/pear/test
+rm -rf %{buildroot}%{_datadir}/pear/docs
+rm -rf %{buildroot}%{_datadir}/pear/tests
 
 install -d %{buildroot}%{_datadir}/pear/packages
 install -m 644 %{upstream_name}.xml %{buildroot}%{_datadir}/pear/packages
 
+%clean
+rm -rf %{buildroot}
+
 %post
+%if %mdkversion < 201000
 pear install --nodeps --soft --force --register-only \
     %{_datadir}/pear/packages/%{upstream_name}.xml >/dev/null || :
+%endif
 
 %preun
+%if %mdkversion < 201000
 if [ "$1" -eq "0" ]; then
     pear uninstall --nodeps --ignore-errors --register-only \
         %{pear_name} >/dev/null || :
 fi
-
-%clean
-rm -rf %{buildroot}
+%endif
 
 %files
 %defattr(-,root,root)
