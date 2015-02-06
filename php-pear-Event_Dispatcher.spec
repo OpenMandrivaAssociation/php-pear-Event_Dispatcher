@@ -4,7 +4,7 @@
 
 Name:		php-pear-%{upstream_name}
 Version:	1.1.0
-Release:	7
+Release:	8
 Summary:	Dispatch notifications using PHP callbacks
 License:	PHP License
 Group:		Development/PHP
